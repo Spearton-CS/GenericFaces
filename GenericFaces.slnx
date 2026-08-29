@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="GenericFaces/GenericFaces.csproj" />
+  <Project Path="LiveTester/LiveTester.csproj" />
+</Solution>
