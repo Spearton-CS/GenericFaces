@@ -1,4 +1,4 @@
-﻿namespace GenericFaces.Construction;
+﻿namespace GenericFaces.Construction.Factory;
 
 public interface IFactory<out TResult>
 	where TResult : allows ref struct

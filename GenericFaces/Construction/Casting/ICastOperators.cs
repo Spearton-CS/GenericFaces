@@ -1,4 +1,4 @@
-﻿namespace GenericFaces.Construction;
+﻿namespace GenericFaces.Construction.Casting;
 
 #region Implicit
 
