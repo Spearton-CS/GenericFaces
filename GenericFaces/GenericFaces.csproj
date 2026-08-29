@@ -28,6 +28,30 @@ and self-made types.</Description>
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
+    <None Include="Patterns\IDeconstructible.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>IDeconstructible.tt</DependentUpon>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Patterns\IDeconstructible.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>IDeconstructible.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Patterns\IDeconstructible.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>IDeconstructible.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
 
 </Project>
