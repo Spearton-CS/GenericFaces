@@ -54,4 +54,8 @@ and self-made types.</Description>
     </Compile>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Numerics\" />
+  </ItemGroup>
+
 </Project>
