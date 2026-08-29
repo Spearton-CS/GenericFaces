@@ -28,6 +28,11 @@ and self-made types.</Description>
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
+    <None Include="Construction\IFactories.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>IFactories.tt</DependentUpon>
+    </None>
     <None Include="Patterns\IDeconstructible.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -36,6 +41,10 @@ and self-made types.</Description>
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Construction\IFactories.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>IFactories.cs</LastGenOutput>
+    </None>
     <None Update="Patterns\IDeconstructible.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>IDeconstructible.cs</LastGenOutput>
@@ -47,6 +56,11 @@ and self-made types.</Description>
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Construction\IFactories.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>IFactories.tt</DependentUpon>
+    </Compile>
     <Compile Update="Patterns\IDeconstructible.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

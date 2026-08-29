@@ -8,48 +8,48 @@ namespace GenericFaces.Patterns;
 
 <#
 	bool first = true;
-	string[]
-		tArgs = new string[15],
-		tParameters = new string[15],
-		tConstraints = new string[15],
-		tCall = new string[15],
-		tCallLess = new string[15];
-	for (int i = 0, iPrev = -1, iDisplay = 1; i < 15; i++, iPrev++, iDisplay++)
+	string
+		tArgs = string.Empty, tArgsPrev = string.Empty,
+		tConstraints = string.Empty,
+		tParameters = string.Empty, tParametersPrev = string.Empty,
+		tCall = string.Empty, tCallPrev = string.Empty;
+	for (int i = 0, iDisplay = 1; i < 16; i++, iDisplay++)
 	{
 		if (first)
 		{
-			tArgs[i] = "T1";
-			tParameters[i] = "out T1 t1";
-			tConstraints[i] = "where T1 : allows ref struct";
-			tCall[i] = "out t1";
-			tCallLess[i] = "out _";
+			tArgs = tArgsPrev = "T1";
+			tConstraints = "where T1 : allows ref struct";
+			tParameters = tParametersPrev = "out T1 t1";
+			tCall = tCallPrev = "out t1";
 		}
 		else
 		{
-			tArgs[i] = tArgs[iPrev] + $", T{iDisplay}";
-			tParameters[i] = tParameters[iPrev] + $", out T{iDisplay} t{iDisplay}";
-			tConstraints[i] = tConstraints[iPrev] + $"\r\n\twhere T{iDisplay} : allows ref struct";
-			tCall[i] = tCall[iPrev] + $", out t{iDisplay}";
-			tCallLess[i] = tCall[iPrev] + $", out _";
+			tArgsPrev = tArgs;
+			tArgs += $", T{iDisplay}";
+			tConstraints += $"\r\n\twhere T{iDisplay} : allows ref struct";
+			tParametersPrev = tParameters;
+			tParameters += $", out T{iDisplay} t{iDisplay}";
+			tCallPrev = tCall;
+			tCall += $", out t{iDisplay}";
 		}
 #>
-public interface IDeconstructible<<#= tArgs[i] #>>
+public interface IDeconstructible<<#= tArgs #>>
 <#
 		if (!first)
 		{
 #>
-	: IDeconstructible<<#= tArgs[iPrev] #>>
+	: IDeconstructible<<#= tArgsPrev #>>
 <#
 		}
 #>
-	<#= tConstraints[i] #>
+	<#= tConstraints #>
 {
-	public void Deconstruct(<#= tParameters[i] #>);
+	public void Deconstruct(<#= tParameters #>);
 <#
 		if (!first)
 		{
 #>
-	void IDeconstructible<<#= tArgs[iPrev] #>>.Deconstruct(<#= tParameters[iPrev] #>) => Deconstruct(<#= tCallLess[i] #>);
+	void IDeconstructible<<#= tArgsPrev #>>.Deconstruct(<#= tParametersPrev #>) => Deconstruct(<#= tCallPrev #>, out _);
 <#
 		}
 #>

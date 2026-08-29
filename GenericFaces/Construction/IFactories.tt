@@ -1,0 +1,125 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" compilerOptions="/nullable:enable /langversion:latest" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+namespace GenericFaces.Construction;
+
+public interface IFactory<out TResult>
+	where TResult : allows ref struct
+{
+	public TResult Create();
+}
+
+public interface IStaticFactory<out TResult>
+	where TResult : allows ref struct
+{
+	public abstract static TResult Create();
+}
+
+public interface IAsyncFactory<TResult>
+{
+	public ValueTask<TResult> CreateAsync();
+}
+
+public interface IStaticAsyncFactory<TResult>
+{
+	public abstract static ValueTask<TResult> CreateAsync();
+}
+
+public interface ITryFactory<TResult>
+	where TResult : allows ref struct
+{
+	public bool TryCreate(out TResult result);
+}
+
+public interface IStaticTryFactory<TResult>
+	where TResult : allows ref struct
+{
+	public abstract static bool TryCreate(out TResult result);
+}
+
+public interface IAsyncTryFactory<TResult>
+{
+	public ValueTask<bool> TryCreateAsync(out TResult result);
+}
+
+public interface IStaticAsyncTryFactory<TResult>
+{
+	public abstract static ValueTask<bool> TryCreateAsync(out TResult result);
+}
+
+<#
+	bool first = true;
+	string
+		tArgs = string.Empty,
+		tConstraints = string.Empty,
+		tParameters = string.Empty;
+	for (int i = 0, iDisplay = 1; i < 16; i++, iDisplay++)
+	{
+		if (first)
+		{
+			tArgs = "in T1";
+			tConstraints = "where T1 : allows ref struct";
+			tParameters = "T1 t1";
+
+			first = false;
+		}
+		else
+		{
+			tArgs += $", in T{iDisplay}";
+			tConstraints += $"\r\n\twhere T{iDisplay} : allows ref struct";
+			tParameters += $", T{iDisplay} t{iDisplay}";
+		}
+#>
+public interface IFactory<out TResult, <#= tArgs #>>
+	where TResult : allows ref struct
+	<#= tConstraints #>
+{
+	public TResult Create(<#= tParameters #>);
+}
+
+public interface IStaticFactory<out TResult, <#= tArgs #>>
+	where TResult : allows ref struct
+	<#= tConstraints #>
+{
+	public abstract static TResult Create(<#= tParameters #>);
+}
+
+public interface IAsyncFactory<TResult, <#= tArgs #>>
+{
+	public ValueTask<TResult> CreateAsync(<#= tParameters #>);
+}
+
+public interface IStaticAsyncFactory<TResult, <#= tArgs #>>
+{
+	public abstract static ValueTask<TResult> CreateAsync(<#= tParameters #>);
+}
+
+public interface ITryFactory<TResult, <#= tArgs #>>
+	where TResult : allows ref struct
+	<#= tConstraints #>
+{
+	public bool TryCreate(<#= tParameters #>, out TResult result);
+}
+
+public interface IStaticTryFactory<TResult, <#= tArgs #>>
+	where TResult : allows ref struct
+	<#= tConstraints #>
+{
+	public abstract static bool TryCreate(<#= tParameters #>, out TResult result);
+}
+
+public interface IAsyncTryFactory<TResult, <#= tArgs #>>
+{
+	public ValueTask<bool> TryCreateAsync(<#= tParameters #>, out TResult result);
+}
+
+public interface IStaticAsyncTryFactory<TResult, <#= tArgs #>>
+{
+	public abstract static ValueTask<bool> TryCreateAsync(<#= tParameters #>, out TResult result);
+}
+<#
+	}
+#>
