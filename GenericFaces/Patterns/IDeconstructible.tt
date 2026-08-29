@@ -8,13 +8,19 @@ namespace GenericFaces.Patterns;
 
 <#
 	bool first = true;
-	string[] tArgs = new string[15], tParameters = new string[15], tCall = new string[15], tCallLess = new string[15];
+	string[]
+		tArgs = new string[15],
+		tParameters = new string[15],
+		tConstraints = new string[15],
+		tCall = new string[15],
+		tCallLess = new string[15];
 	for (int i = 0, iPrev = -1, iDisplay = 1; i < 15; i++, iPrev++, iDisplay++)
 	{
 		if (first)
 		{
 			tArgs[i] = "T1";
 			tParameters[i] = "out T1 t1";
+			tConstraints[i] = "where T1 : allows ref struct";
 			tCall[i] = "out t1";
 			tCallLess[i] = "out _";
 		}
@@ -22,6 +28,7 @@ namespace GenericFaces.Patterns;
 		{
 			tArgs[i] = tArgs[iPrev] + $", T{iDisplay}";
 			tParameters[i] = tParameters[iPrev] + $", out T{iDisplay} t{iDisplay}";
+			tConstraints[i] = tConstraints[iPrev] + $"\r\n\twhere T{iDisplay} : allows ref struct";
 			tCall[i] = tCall[iPrev] + $", out t{iDisplay}";
 			tCallLess[i] = tCall[iPrev] + $", out _";
 		}
@@ -35,6 +42,7 @@ public interface IDeconstructible<<#= tArgs[i] #>>
 <#
 		}
 #>
+	<#= tConstraints[i] #>
 {
 	public void Deconstruct(<#= tParameters[i] #>);
 <#
