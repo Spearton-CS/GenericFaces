@@ -1,4 +1,4 @@
-﻿namespace GenericFaces.Collections;
+﻿namespace GenericFaces.Collections.Abilities;
 
 public interface ICountable<out TCount> where TCount : allows ref struct
 {

@@ -1,4 +1,4 @@
-﻿namespace GenericFaces.Collections;
+﻿namespace GenericFaces.Collections.Abilities;
 
 public interface IPeekable<T> where T : allows ref struct
 {

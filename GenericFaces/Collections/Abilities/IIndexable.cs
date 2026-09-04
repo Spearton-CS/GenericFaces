@@ -1,4 +1,4 @@
-﻿namespace GenericFaces.Collections;
+﻿namespace GenericFaces.Collections.Abilities;
 
 public interface IReadOnlyIndexable<in TIndex, out TResult>
     where TIndex : allows ref struct

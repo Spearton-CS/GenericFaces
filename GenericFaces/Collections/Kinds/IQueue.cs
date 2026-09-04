@@ -1,4 +1,6 @@
-﻿namespace GenericFaces.Collections;
+﻿using GenericFaces.Collections.Abilities;
+
+namespace GenericFaces.Collections.Kinds;
 
 public interface IQueue<T, out TCount> : ICountable<TCount>, IEnumerable<T>
     where T : allows ref struct

@@ -1,4 +1,4 @@
-﻿namespace GenericFaces.Collections;
+﻿namespace GenericFaces.Collections.Kinds;
 
 public interface IDeque<T, out TCount, out TEnumerator> : IDeque<T, TCount>, IQueue<T, TCount, TEnumerator>, IStack<T, TCount, TEnumerator>
     where T : allows ref struct
