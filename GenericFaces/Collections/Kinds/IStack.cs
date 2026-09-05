@@ -2,6 +2,9 @@
 
 namespace GenericFaces.Collections.Kinds;
 
+public interface IStack<T> : IStack<T, int>, ICountable
+    where T : allows ref struct;
+
 public interface IStack<T, out TCount> : ICountable<TCount>, IEnumerable<T>
     where T : allows ref struct
     where TCount : allows ref struct
@@ -10,9 +13,9 @@ public interface IStack<T, out TCount> : ICountable<TCount>, IEnumerable<T>
     public bool TryPush(T value);
 
     public T Pop();
-    public bool TryPop(out T value);
+    public bool TryPop(out T? value);
 }
-public interface IStack<T> : IStack<T, int>, ICountable where T : allows ref struct;
+
 public interface IStack<T, out TCount, out TEnumerator> : IStack<T, TCount>, IEnumerable<T, TEnumerator>
     where T : allows ref struct
     where TCount : allows ref struct
